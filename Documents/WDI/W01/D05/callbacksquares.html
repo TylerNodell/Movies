@@ -1,0 +1,42 @@
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <canvas id="the_canvas" width="900" height="900"></canvas>
+  <script charset="utf-8">
+    var c = document.getElementById("the_canvas");
+    var ctx = c.getContext("2d");
+    var a = -150;
+    var b = -150;
+
+    setInterval(function() {
+      if (a === 900) {
+        a = -100;
+      }
+      if (b === 900) {
+        b = -100;
+      }
+    }, 20);
+
+
+    setInterval(function() {
+      ctx.fillStyle = "white";
+      ctx.fillRect(0,0,900,900);
+    }, 20)
+
+      setInterval(function() {
+        // var red = Math.floor(256*Math.random());
+        // var green = Math.floor(256*Math.random());
+        // var blue = Math.floor(256*Math.random());
+      //ctx.fillStyle = "rgb(" + red + "," + green + "," + blue + ")"
+      ctx.fillStyle = "red";
+      ctx.fillRect(a++,b++,100,100);
+
+
+  }, 20);
+
+
+  </script>
+</body>
+</html>
