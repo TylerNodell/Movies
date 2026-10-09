@@ -73,13 +73,23 @@ var server = http.createServer(function(req,res){
     path = path.slice(1);
     path = path.toString();
 
+    // Only the bundled book texts (library/<name>.txt) may be read here.
+    // Anything else (../, absolute paths, other files) is rejected.
+    if (!/^library\/[A-Za-z0-9_-]+\.txt$/.test(path)) {
+      res.statusCode = 404;
+      res.end("Not Found");
+      return;
+    }
+
     fs.readFile("print.html",function(err,data){
       var index = data.toString().split("[replace]")
 
       fs.readFile(path, function(err, data){
-        if (err){w
+        if (err){
           console.log(path);
           console.log("Read Error");
+          res.statusCode = 404;
+          index = "Not Found";
         } else {
           var text = data.toString();
           text = text.replace(/\n/g,'</br>');
